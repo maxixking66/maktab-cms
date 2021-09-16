@@ -55,4 +55,14 @@ public class User extends BaseEntity<Long> {
 
     @Column(name = BIRTH_DATE)
     private ZonedDateTime birthDate;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", userType='" + userType + '\'' +
+                '}';
+    }
 }

@@ -58,7 +58,7 @@ public class Media extends BaseEntity<Long> {
     @JoinColumn(name = MEDIA_CATEGORY_ID)
     private MediaCategory mediaCategory;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = MEDIA_TAGS, joinColumns = {@JoinColumn(name = MEDIA_ID, referencedColumnName = ID)},
             inverseJoinColumns = {@JoinColumn(name = TAG_ID, referencedColumnName = ID)})
     private Set<Tag> tagSet = new HashSet<>();
@@ -66,4 +66,19 @@ public class Media extends BaseEntity<Long> {
     @ManyToOne
     @JoinColumn(name = USER_ID)
     private User user;
+
+    @Override
+    public String toString() {
+        return "Media{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createDate=" + createDate +
+                ", lastUpdateDate=" + lastUpdateDate +
+                ", publishDate=" + publishDate +
+                ", mediaType=" + mediaType +
+                ", mediaCategory=" + mediaCategory +
+                ", tagSet=" + tagSet +
+                ", user=" + user +
+                '}';
+    }
 }

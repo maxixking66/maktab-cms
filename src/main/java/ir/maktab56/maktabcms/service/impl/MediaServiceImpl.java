@@ -29,4 +29,11 @@ public class MediaServiceImpl extends BaseEntityServiceImpl<Media, Long, MediaRe
             return super.save(media);
         }
     }
+
+    @Override
+    public void insert(Media media) {
+        repository.getEntityManager().getTransaction().begin();
+        repository.save(media);
+        repository.getEntityManager().getTransaction().commit();
+    }
 }

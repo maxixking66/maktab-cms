@@ -27,4 +27,11 @@ public class BaseCategory<E extends BaseCategory<E>> extends BaseEntity<Long> {
     @OneToMany
     @JoinColumn(name = PARENT_ID)
     private Set<E> childrenCategories = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "BaseCategory{" +
+                "title='" + title + '\'' +
+                '}';
+    }
 }
