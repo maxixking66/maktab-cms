@@ -34,15 +34,27 @@ public class MaktabCmsApplication {
         );*/
 
         EntityManager entityManager = HibernateUtil.getMainEntityMangerFactory().createEntityManager();
-        TypedQuery<Media> query = entityManager.createQuery("from Media", Media.class);
+        TypedQuery<Long> query = entityManager.createQuery("select id from Media", Long.class);
+
+        /*EntityGraph<Media> entityGraph = entityManager.createEntityGraph(Media.class);
+        entityGraph.addAttributeNodes("user", "mediaCategory", "tagSet");
+        query.setHint("javax.persistence.fetchgraph", entityGraph);*/
+        query.setMaxResults(5)
+                .setFirstResult(0);
+
+        List<Long> resultList = query.getResultList();
+
+        TypedQuery<Media> typedQuery = entityManager.createQuery("from Media m where m.id in :ids", Media.class)
+                .setParameter("ids", resultList);
 
         EntityGraph<Media> entityGraph = entityManager.createEntityGraph(Media.class);
         entityGraph.addAttributeNodes("user", "mediaCategory", "tagSet");
-        query.setHint("javax.persistence.fetchgraph", entityGraph);
+        typedQuery.setHint("javax.persistence.fetchgraph", entityGraph);
 
-        List<Media> resultList = query.getResultList();
+
+        List<Media> mediaList = typedQuery.getResultList();
         System.out.println();
-        resultList.forEach(media -> {
+        mediaList.forEach(media -> {
                     System.out.println(media);
                     System.out.println();
                 }
