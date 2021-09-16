@@ -10,4 +10,9 @@ public class UserServiceImpl extends BaseEntityServiceImpl<User, Long, UserRepos
     public UserServiceImpl(UserRepository repository) {
         super(repository);
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return repository.getUserByUsername(username);
+    }
 }
