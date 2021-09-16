@@ -17,11 +17,11 @@ public class BaseCategoryServiceImpl<E extends BaseCategory<E>, R extends BaseCa
 
     @Override
     public List<E> findAllByTitleContaining(String title) {
-        return null;
+        return repository.findAllByTitleContaining(title);
     }
 
     @Override
     public List<E> findAllByParentId(Long parentId) {
-        return null;
+        return repository.findAllByParent_Id(parentId);
     }
 }
