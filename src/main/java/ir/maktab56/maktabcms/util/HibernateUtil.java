@@ -5,14 +5,20 @@ import javax.persistence.Persistence;
 
 public class HibernateUtil {
 
-    private static final EntityManagerFactory entityMangerFactory;
+    /*private static final EntityManagerFactory mainEntityMangerFactory;*/
+
+    private static final EntityManagerFactory testEntityMangerFactory;
 
     static {
-        entityMangerFactory =
-                Persistence.createEntityManagerFactory("Unit");
+        /*mainEntityMangerFactory = Persistence.createEntityManagerFactory("Unit");*/
+        testEntityMangerFactory = Persistence.createEntityManagerFactory("Test");
     }
 
-    public static EntityManagerFactory getEntityMangerFactory() {
-        return entityMangerFactory;
+    /*public static EntityManagerFactory getMainEntityMangerFactory() {
+        return mainEntityMangerFactory;
+    }*/
+
+    public static EntityManagerFactory getTestEntityMangerFactory() {
+        return testEntityMangerFactory;
     }
 }
